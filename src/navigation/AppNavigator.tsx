@@ -13,16 +13,19 @@ const Stack = createStackNavigator<RootStackParamList>();
 
 const AppNavigator: React.FC = () => {
   return (
-    <Stack.Navigator initialRouteName="LaunchList">
+    <Stack.Navigator 
+      initialRouteName="LaunchList"
+      screenOptions={{
+        headerShown: false // This will hide the header for all screens
+      }}
+    >
       <Stack.Screen
         name="LaunchList"
         component={LaunchListScreen}
-        options={{ title: 'SpaceX Launches' }}
       />
       <Stack.Screen
         name="LaunchDetails"
         component={LaunchDetailScreen}
-        options={{ title: 'Launch Details' }}
       />
     </Stack.Navigator>
   );
