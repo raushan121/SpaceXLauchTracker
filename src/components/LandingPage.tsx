@@ -7,7 +7,8 @@ import {
   StyleSheet,
   ScrollView,
   Platform,
-  Dimensions
+  Dimensions,
+  Linking
 } from 'react-native';
 import { BlurView } from '@react-native-community/blur';
 
@@ -92,10 +93,19 @@ const SpaceXLaunchUI = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const handleWatchLive = () => {
-    // Handle watch live functionality
-    console.log('Watch live pressed');
-  };
+ const handleWatchLive = () => {
+  const youtubeDeepLink = 'vnd.youtube://channel/UCtI0Hodo5o5dUb67FeUjDeA';
+  const youtubeWebURL = 'https://www.youtube.com/c/SpaceX';
+  
+  // Try to open YouTube app first, fallback to browser
+  Linking.canOpenURL(youtubeDeepLink).then(supported => {
+    if (supported) {
+      Linking.openURL(youtubeDeepLink);
+    } else {
+      Linking.openURL(youtubeWebURL);
+    }
+  });
+};
 
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
